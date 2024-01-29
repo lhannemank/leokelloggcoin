@@ -20,6 +20,8 @@ blockchain = [
 # Write code below that returns the number of KelloggCoin that each user has in their 
 # KelloggCoin "wallet".
 
+
+
 # It should print out:
 # Ben's KelloggCoin balance is 14000
 # Brian's KelloggCoin balance is 13000
@@ -27,3 +29,30 @@ blockchain = [
 # Anthony's KelloggCoin balance is 2650
 
 # 👇👇👇 Your code HERE 👇👇👇
+
+#Create list of users and initial balances
+users = [
+  {"name" => "ben", "balance" => 0},
+  {"name" => "brian", "balance" => 0},
+  {"name" => "evan", "balance" => 0},
+  {"name" => "anthony", "balance" => 0}
+]
+
+#For each transaction, decrease the balance of the sender
+for transaction in blockchain
+  for user in users
+    if user["name"] == transaction["from_user"]
+      user["balance"] = user["balance"] - transaction["amount"]
+    end
+
+#For each transaction, increase the balance of the recipient
+    if user["name"] == transaction["to_user"]
+      user["balance"] = user["balance"] + transaction["amount"]
+    end
+  end
+end
+
+#Display each user balance, with names capitalized
+for user in users
+  puts "#{user["name"].capitalize}'s KelloggCoin balance is #{user["balance"]}"
+end
